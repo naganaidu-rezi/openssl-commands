@@ -20,3 +20,16 @@ enter blank as password for new pfx
 openssl pkcs12 -export -keypbe NONE -certpbe NONE -in abc.cer -inkey abc.key -out abc_wop.pfx
 
 ```
+
+
+
+
+
+                  OR
+```
+openssl pkcs12 -in MyCertificate.pfx -clcerts -nokeys -out MyCertificate.crt
+openssl pkcs12 -in MyCertificate.pfx -nocerts -out MyCertificate-encrypted.key
+openssl rsa -in MyCertificate-encrypted.key -out MyCertificate_unenc.key
+openssl pkcs12 -export -out MyCertificate_np.pfx -inkey MyCertificate_unenc.key -in MyCertificate.crt -passout pass:
+
+```
